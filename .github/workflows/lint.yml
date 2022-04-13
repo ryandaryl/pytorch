@@ -573,7 +573,7 @@ jobs:
       - name: Checkout rest of history
         env:
           HASH: ${{ (github.event_name == 'pull_request' && github.event.pull_request.head.sha) || github.sha }}
-        run: git fetch --no-tags --prune --no-recurse-submodules --unshallow origin "${HASH}"
+        run: git fetch --no-tags --prune --no-recurse-submodules --unshallow origin "${HASH}" master
       - name: Install dependencies
         # mypy and boto3 versions copied from
         # .circleci/docker/common/install_conda.sh
