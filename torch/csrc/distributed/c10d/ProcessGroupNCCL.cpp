@@ -1375,7 +1375,6 @@ c10::intrusive_ptr<ProcessGroup::Work> ProcessGroupNCCL::collective(
     PostProcess post,
     OpType opType,
     const char* profilingTitle) {
-
   errorIfCapturingNonCapturableNCCL();
 
   // Bump collective counter

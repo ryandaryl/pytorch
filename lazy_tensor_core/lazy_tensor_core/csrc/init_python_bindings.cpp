@@ -666,6 +666,8 @@ void InitLtcModuleBindings(py::module m) {
   m.def("_ltc_enable_thread_pool", []() {
     FLAGS_torch_lazy_use_thread_pool = true;
   });
+  m.def("_ltc_set_reuse_ir",
+        [](bool flag) { FLAGS_torch_lazy_reuse_ir = flag; });
   /*
    * Return tensor ids and tensors for DeviceData nodes.
    * TODO(shunting) revisit this API for XLA

@@ -21,6 +21,14 @@ std::string Output::ToString() const {
   return ss.str();
 }
 
+bool Output::operator==(const Value& rhs) const {
+  // printf("Calling Output::operator==,%s, op=%s, comparing to index %lu and
+  // %lu \n",
+  //  HashToString(node->hash()).c_str(),
+  //  HashToString(rhs.node->hash()).c_str(), index, rhs.index);
+  return node->hash() == rhs.node->hash() && index == rhs.index;
+}
+
 hash_t Value::hash() const {
   return HashCombine(node->hash(), Hash(index));
 }
