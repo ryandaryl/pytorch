@@ -33,6 +33,10 @@ jobs:
       # [see note: pytorch repo ref]
       - name: Checkout PyTorch
         uses: pytorch/pytorch/.github/actions/checkout-pytorch@clee2000/please-ignore
+      - name: Checkout the rest of history
+        env:
+          HASH: ${{ (github.event_name == 'pull_request' && github.event.pull_request.head.sha) || github.sha }}
+        run: git fetch --no-tags --prune --no-recurse-submodules origin "${HASH}"
 
       - name: Setup Linux
         uses: ./.github/actions/setup-linux

@@ -569,8 +569,11 @@ jobs:
       - name: Checkout PyTorch
         uses: pytorch/pytorch/.github/actions/checkout-pytorch@clee2000/please-ignore
         with:
-          additional-refs: refs/heads/master
           submodules: false
+      - name: Checkout rest of history
+        env:
+          HASH: ${{ (github.event_name == 'pull_request' && github.event.pull_request.head.sha) || github.sha }}
+        run: git fetch --no-tags --prune --no-recurse-submodules origin "${HASH}"
       - name: Install dependencies
         # mypy and boto3 versions copied from
         # .circleci/docker/common/install_conda.sh
