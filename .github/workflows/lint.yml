@@ -18,8 +18,9 @@ jobs:
           architecture: x64
       # [see note: pytorch repo ref]
       - name: Checkout PyTorch
-        uses: pytorch/pytorch/.github/actions/checkout-pytorch@master
+        uses: pytorch/pytorch/.github/actions/checkout-pytorch@clee2000/please-ignore
         with:
+          additional-refs: refs/heads/master
           submodules: false
       - name: Clean PyTorch checkout
         run: |
@@ -129,8 +130,9 @@ jobs:
       # [see note: pytorch repo ref]
       # deep clone (fetch-depth 0 required to use git merge-base)
       - name: Checkout PyTorch
-        uses: pytorch/pytorch/.github/actions/checkout-pytorch@master
+        uses: pytorch/pytorch/.github/actions/checkout-pytorch@clee2000/please-ignore
         with:
+          additional-refs: refs/heads/master
           submodules: false
       - name: Run clang-format
         env:
@@ -170,8 +172,9 @@ jobs:
           architecture: x64
       # [see note: pytorch repo ref]
       - name: Checkout PyTorch
-        uses: pytorch/pytorch/.github/actions/checkout-pytorch@master
+        uses: pytorch/pytorch/.github/actions/checkout-pytorch@clee2000/please-ignore
         with:
+          additional-refs: refs/heads/master
           submodules: false
       - name: Attempt to run setup.py
         run: |
@@ -193,8 +196,9 @@ jobs:
           architecture: x64
       # [see note: pytorch repo ref]
       - name: Checkout PyTorch
-        uses: pytorch/pytorch/.github/actions/checkout-pytorch@master
+        uses: pytorch/pytorch/.github/actions/checkout-pytorch@clee2000/please-ignore
         with:
+          additional-refs: refs/heads/master
           submodules: false
       - name: Install requirements
         id: requirements
@@ -203,6 +207,12 @@ jobs:
       - name: Install Jinja2
         run: |
           pip3 install Jinja2==3.0.1 --user
+      # [see note: pytorch repo ref]
+      - name: Checkout PyTorch
+        uses: pytorch/pytorch/.github/actions/checkout-pytorch@clee2000/please-ignore
+        with:
+          additional-refs: refs/heads/master
+          submodules: false
       - name: Regenerate workflows
         id: generate_workflows
         run: .github/scripts/generate_ci_workflows.py
@@ -266,7 +276,6 @@ jobs:
             ./actionlint --color
             rm actionlint
 
-
   toc:
     name: toc
     runs-on: ubuntu-18.04
@@ -278,8 +287,9 @@ jobs:
         uses: actions/setup-node@v2
       # [see note: pytorch repo ref]
       - name: Checkout PyTorch
-        uses: pytorch/pytorch/.github/actions/checkout-pytorch@master
+        uses: pytorch/pytorch/.github/actions/checkout-pytorch@clee2000/please-ignore
         with:
+          additional-refs: refs/heads/master
           submodules: false
       - name: Install markdown-toc
         run: npm install -g markdown-toc
@@ -319,8 +329,9 @@ jobs:
       # [see note: pytorch repo ref]
       # fetch-depth 2 required to allow us to use github.event.pull_request.head.sha
       - name: Checkout PyTorch
-        uses: pytorch/pytorch/.github/actions/checkout-pytorch@master
+        uses: pytorch/pytorch/.github/actions/checkout-pytorch@clee2000/please-ignore
         with:
+          additional-refs: refs/heads/master
           submodules: false
       - name: Prepare output dir with HEAD commit SHA
         env:
@@ -365,7 +376,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          check_name: 'flake8-py3'
+          check_name: "flake8-py3"
           linter_output_path: flake8-output/annotations.json
           commit_sha: ${{ github.event.pull_request.head.sha }}
           mode: json
@@ -384,9 +395,10 @@ jobs:
       # [see note: pytorch repo ref]
       # deep clone (fetch-depth 0) to allow tools/linter/clang_tidy.py to do its thing
       - name: Checkout PyTorch
-        uses: pytorch/pytorch/.github/actions/checkout-pytorch@master
+        uses: pytorch/pytorch/.github/actions/checkout-pytorch@clee2000/please-ignore
         with:
           no-sudo: true
+          additional-refs: refs/heads/master
           submodules: false
       - name: Prepare output dir with HEAD commit SHA
         env:
@@ -464,7 +476,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          check_name: 'clang-tidy'
+          check_name: "clang-tidy"
           linter_output_path: clang-tidy/annotations.json
           commit_sha: ${{ github.event.pull_request.head.sha }}
           mode: json
@@ -480,8 +492,9 @@ jobs:
           architecture: x64
       # [see note: pytorch repo ref]
       - name: Checkout PyTorch
-        uses: pytorch/pytorch/.github/actions/checkout-pytorch@master
+        uses: pytorch/pytorch/.github/actions/checkout-pytorch@clee2000/please-ignore
         with:
+          additional-refs: refs/heads/master
           submodules: false
       - name: Install dependencies
         run: |
@@ -506,8 +519,9 @@ jobs:
           architecture: x64
       # [see note: pytorch repo ref]
       - name: Checkout PyTorch
-        uses: pytorch/pytorch/.github/actions/checkout-pytorch@master
+        uses: pytorch/pytorch/.github/actions/checkout-pytorch@clee2000/please-ignore
         with:
+          additional-refs: refs/heads/master
           submodules: false
       - name: Install dependencies
         run: |
@@ -553,8 +567,9 @@ jobs:
       # [see note: pytorch repo ref]
       # deep clone (fetch-depth 0) required, to allow us to use git log
       - name: Checkout PyTorch
-        uses: pytorch/pytorch/.github/actions/checkout-pytorch@master
+        uses: pytorch/pytorch/.github/actions/checkout-pytorch@clee2000/please-ignore
         with:
+          additional-refs: refs/heads/master
           submodules: false
       - name: Install dependencies
         # mypy and boto3 versions copied from
@@ -585,8 +600,9 @@ jobs:
       # [see note: pytorch repo ref]
       # deep clone (fetch-depth 0) required, to allow us to use git log
       - name: Checkout PyTorch
-        uses: pytorch/pytorch/.github/actions/checkout-pytorch@master
+        uses: pytorch/pytorch/.github/actions/checkout-pytorch@clee2000/please-ignore
         with:
+          additional-refs: refs/heads/master
           submodules: false
       - name: Install torch
         if: matrix.with_torch == 'with_torch'

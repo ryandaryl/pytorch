@@ -10,6 +10,10 @@ inputs:
     description: Works as stated in actions/checkout, but the default value is recursive
     required: false
     default: recursive
+  additional-refs:
+    description: Additonal refs to fetch
+    default: ""
+    required: false
 
 runs:
   using: composite
@@ -27,10 +31,15 @@ runs:
         fi
         mkdir "${GITHUB_WORKSPACE}"
 
+    - name: echo
+      shell: bash
+      env:
+        THING: ${{ toJSON(github.event) }}
+      run: echo "hello"
     - name: Checkout PyTorch
       uses: zhouzhuojie/checkout@05b13c9a0d21f08f6d5e64a1d5042246d13619d9
       with:
-        ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+        ref: ${{ (github.event_name == 'pull_request' && github.event.pull_request.head.sha) || github.sha }}
         # deep clone, to allow use of git merge-base
-        fetch-depth: 0
+        fetch-depth: 1
         submodules: ${{ inputs.submodules }}
